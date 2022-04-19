@@ -3,11 +3,13 @@
     <h1>Home</h1>
     <p ref="p">my name is {{ name }} and my age is {{ age }}</p>
     <button @click="handleClick">click me</button>
+    <button @click="age++">Add age</button>
+    <input type="text" v-model="name" />
   </div>
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
+import { ref, reactive } from "@vue/reactivity";
 export default {
   name: "Home",
   //the setup will run before any of the lifecycle hooks
@@ -25,19 +27,32 @@ export default {
 
     const p = ref(null);
 
-    let name = "mario";
-    let age = 30;
+    //these data set are not reactive variables by default in the setup function
+    //let name = "mario";
+    //let age = 30;
+
+    //we make them reactive by surrounding them with refs
+    //we generally use refs in composition api
+    //asides using refs to create reactive values, we can also use reactive
+    //
+    const name = ref("benson");
+    const age = ref(30);
 
     const handleClick = () => {
-      console.log(p, p.value);
+      //console.log(p, p.value);
       //we can take the value and do any JS operation on it
-      p.value.classList.add("test");
-      p.value.textContent = "welcome Benny";
+      //p.value.classList.add("test");
+      //p.value.textContent = "welcome Benny";
+
+      name.value = "Chijioke";
+      age.value = 25;
     };
 
     //always return anything you have in the setup to make them available in the template
     //If we don't return the p for example, it won't be associated with the p in the dorm element
     //
+
+    
 
     return { name, age, handleClick, p };
   },
