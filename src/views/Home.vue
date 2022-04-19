@@ -15,11 +15,22 @@
     <h2>Reactive</h2>
     <p>{{ bennyTwo.names }} - {{ bennyTwo.ages }}</p>
     <button @click="updateBennyTwo">Update bennytwo</button>
+    <br />
+    <br />
+    <p>computed -{{ callme }}</p>
+    <br />
+    <br />
+    <!-- using the computed property inside the setup  -->
+    <input type="text" v-model="search" />
+    <p>search term - {{ search }}</p>
+    <div v-for="item in matchingNamez" :key="item">{{ item }}</div>
   </div>
 </template>
 
 <script>
 import { ref, reactive } from "@vue/reactivity";
+import { computed } from "@vue/runtime-core";
+
 export default {
   name: "Home",
   //the setup will run before any of the lifecycle hooks
@@ -69,11 +80,22 @@ export default {
     //in reactive, we don't use dot value
     //we can't use primitive values inside reactive
     //Refs will also work better as opposed to external composition functions when compared to reactive
-    
+
     const bennyTwo = reactive({ names: "ceejay", ages: 20 });
     const updateBennyTwo = () => {
       bennyTwo.ages = 46;
     };
+
+    //computed properties. It is used to compute other values based on a value(s)
+    const callme = computed(() => {
+      return "hey you";
+    });
+
+    const search = ref("");
+    const namez = ref(["gold", "silver", "bronze", "copper", "iron"]);
+    const matchingNamez = computed(() => {
+      return namez.value.filter((item) => item.includes(search.value));
+    });
 
     return {
       name,
@@ -84,6 +106,10 @@ export default {
       p,
       updateBennyOne,
       updateBennyTwo,
+      callme,
+      namez,
+      search,
+      matchingNamez,
     };
   },
 };
