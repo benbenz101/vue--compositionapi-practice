@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <PostList />
+
     <h1>Home</h1>
     <p ref="p">my name is {{ name }} and my age is {{ age }}</p>
     <button @click="handleClick">click me</button>
@@ -28,11 +30,14 @@
 </template>
 
 <script>
+import PostList from "../components/PostList.vue";
 import { ref, reactive } from "@vue/reactivity";
 import { computed } from "@vue/runtime-core";
 
 export default {
   name: "Home",
+  components: { PostList },
+
   //the setup will run before any of the lifecycle hooks
   //the compositio api allows you to put all the data, lifecycle hooks, computed and components and methods in one setup function
   //we can run any javascript in the setup function

@@ -1,7 +1,4 @@
 <template>
-<div class="post-list">
-
-</div>
   
 </template>
 
@@ -9,7 +6,7 @@
 export default {
 
 }
-</script> 
+</script>
 
 <style>
 
