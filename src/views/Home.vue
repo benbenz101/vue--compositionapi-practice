@@ -5,6 +5,16 @@
     <button @click="handleClick">click me</button>
     <button @click="age++">Add age</button>
     <input type="text" v-model="name" />
+    <br />
+    <br />
+    <h2>Refs</h2>
+    <p>{{ bennyOne.names }} - {{ bennyOne.ages }}</p>
+    <button @click="updateBennyOne">Update bennyone</button>
+    <br />
+    <br />
+    <h2>Reactive</h2>
+    <p>{{ bennyTwo.names }} - {{ bennyTwo.ages }}</p>
+    <button @click="updateBennyTwo">Update bennytwo</button>
   </div>
 </template>
 
@@ -50,11 +60,31 @@ export default {
 
     //always return anything you have in the setup to make them available in the template
     //If we don't return the p for example, it won't be associated with the p in the dorm element
-    //
 
+    const bennyOne = ref({ names: "ceejay", ages: 20 });
+    const updateBennyOne = () => {
+      bennyOne.value.ages = 46;
+    };
+
+    //in reactive, we don't use dot value
+    //we can't use primitive values inside reactive
+    //Refs will also work better as opposed to external composition functions when compared to reactive
     
+    const bennyTwo = reactive({ names: "ceejay", ages: 20 });
+    const updateBennyTwo = () => {
+      bennyTwo.ages = 46;
+    };
 
-    return { name, age, handleClick, p };
+    return {
+      name,
+      age,
+      bennyOne,
+      bennyTwo,
+      handleClick,
+      p,
+      updateBennyOne,
+      updateBennyTwo,
+    };
   },
 };
 </script>
